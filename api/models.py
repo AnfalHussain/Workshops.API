@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 class Workshop(models.Model):
     name = models.CharField(max_length=150)
-    description = models.CharField(max_length=350)
+    description = models.TextField(max_length=500)
     image = models.ImageField()
     price = models.PositiveIntegerField(default=10)
 
