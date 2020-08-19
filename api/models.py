@@ -87,10 +87,14 @@ class Registration(models.Model):
     payment_status = models.CharField(
         max_length=20, choices=STATUS, default="PENDING"
     )
+    reference_number = models.CharField(max_length=10)
+
+    def __str__(self):
+        return ("Registration " + self.reference_number)
 
 
-class Basket(models.Model):
+class Cart(models.Model):
     workshop = models.ForeignKey(
         Workshop, on_delete=models.CASCADE, related_name='workshops')
     registration = models.ForeignKey(
-        Registration, on_delete=models.CASCADE, related_name='baskets')
+        Registration, on_delete=models.CASCADE, related_name='carts')
