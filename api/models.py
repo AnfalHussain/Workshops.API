@@ -39,37 +39,42 @@ class Profile(models.Model):
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='profile')
-    first_name = models.CharField(max_length=150)
-    middle_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    gender = models.CharField(
-        max_length=8, choices=GENDER, default="Female"
-    )
-    nationality = models.CharField(max_length=150)
-    mobile_number = PhoneNumberField()
-    secondary_contact_number = PhoneNumberField()
+    first_name = models.CharField(max_length=150, null=True)
+    middle_name = models.CharField(max_length=150, null=True)
+    last_name = models.CharField(max_length=150, null=True)
+    gender = models.CharField(null=True,
+                              max_length=8, choices=GENDER, default="Female"
+                              )
+    nationality = models.CharField(max_length=150, null=True)
+    mobile_number = PhoneNumberField(null=True)
+    secondary_contact_number = PhoneNumberField(null=True)
     # assuming that the civil id max length is 12 and validating that it consists of digits only
-    civil_id_number = models.CharField(max_length=12, validators=[
+    civil_id_number = models.CharField(max_length=12, null=True, validators=[
                                        RegexValidator(r'^\d{1,10}$')])
-    birthdate = models.DateField()
+    birthdate = models.DateField(null=True)
     governorate = models.CharField(
-        max_length=20, choices=GOVERNORATE, default="AHMADI"
+        max_length=20, choices=GOVERNORATE, default="AHMADI", null=True
     )
-    area = models.CharField(max_length=150)
-    education_level = models.CharField(max_length=150, )
+    area = models.CharField(max_length=150, null=True)
+    education_level = models.CharField(max_length=150, null=True)
     major = models.CharField(max_length=150, blank=True, null=True)
+    age = models.PositiveIntegerField(null=True)
+    # @property
+    # def age(self):
+    #     current_age = 0
+    #     if self.birthdate:
+    #         current_age = int(
+    #             (datetime.now().date() - self.birthdate).days / 365.25)
+    #     return current_age
 
-    @property
-    def age(self):
-        return int((datetime.now().date() - self.birthdate).days / 365.25)
-
-        def __str__(self):
-            return self.user.username
+    #     def __str__(self):
+    #         return self.user.username
 
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
+        print("here inside create_profile")
         Profile.objects.create(user=instance)
 
 
