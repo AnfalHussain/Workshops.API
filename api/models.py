@@ -42,18 +42,19 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=150, null=True)
     middle_name = models.CharField(max_length=150, null=True)
     last_name = models.CharField(max_length=150, null=True)
-    gender = models.CharField(null=True,
-                              max_length=8, choices=GENDER, default="Female"
-                              )
+    gender = models.CharField(
+        max_length=8, choices=GENDER, null=True
+    )
     nationality = models.CharField(max_length=150, null=True)
     mobile_number = PhoneNumberField(null=True)
     secondary_contact_number = PhoneNumberField(null=True)
     # assuming that the civil id max length is 12 and validating that it consists of digits only
     civil_id_number = models.CharField(max_length=12, null=True, validators=[
-                                       RegexValidator(r'^\d{1,10}$')])
+                                       RegexValidator(r'^[0-9]*$')])
+
     birthdate = models.DateField(null=True)
     governorate = models.CharField(
-        max_length=20, choices=GOVERNORATE, default="AHMADI", null=True
+        max_length=20, choices=GOVERNORATE, null=True
     )
     area = models.CharField(max_length=150, null=True)
     education_level = models.CharField(max_length=150, null=True)
