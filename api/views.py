@@ -34,14 +34,14 @@ class RegistrationItems(APIView):
             total += Workshop.objects.get(id=workshop['id']).price
 
         registration_order = Registration.objects.create(
-            reference_number=rand_reference_number, customer=request.user, total=total, payment_status="SUCCESSFUL")
+            reference_number=random_reference_number, customer=request.user, total=total, payment_status="SUCCESSFUL")
 
         for workshop in workshops:
             Cart.objects.create(
                 workshop_id=workshop['id'],
                 registration=registration_order
             )
-            return Response(self.serializer_class(registration).data, status=HTTP_200_OK)
+        return Response(self.serializer_class(Registration).data, status=HTTP_200_OK)
 
 
 class UserCreateAPIView(CreateAPIView):
