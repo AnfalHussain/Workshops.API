@@ -41,7 +41,7 @@ class RegistrationItems(APIView):
                 workshop_id=workshop['id'],
                 registration=registration_order
             )
-        return Response(self.serializer_class(Registration).data, status=HTTP_200_OK)
+        return Response(self.serializer_class(registration_order).data, status=HTTP_200_OK)
 
 
 class UserCreateAPIView(CreateAPIView):

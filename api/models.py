@@ -52,7 +52,7 @@ class Profile(models.Model):
     civil_id_number = models.CharField(max_length=12, null=True, validators=[
                                        RegexValidator(r'^[0-9]*$')])
 
-    birthdate = models.DateField(null=True)
+    # birthdate = models.DateField(null=True)
     governorate = models.CharField(
         max_length=20, choices=GOVERNORATE, null=True
     )
