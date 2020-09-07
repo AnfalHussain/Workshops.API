@@ -40,3 +40,14 @@ class TestModels(TestCase):
             major="thing",
             age="22",
         )
+    def test_create_registration(self):
+        Registration.objects.create(
+               customer = self.user1,
+    total = 19.5,
+    payment_status = "PENDING",
+
+    reference_number = "sw21903576",
+        )
+
+
+
