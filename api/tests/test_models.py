@@ -23,7 +23,7 @@ class TestModels(TestCase):
             price='200',
         )
 
-    def test_create_profile(self):
+    def test_update_profile(self):
         Profile.objects.update(
             user_id=1,
             first_name="user",
@@ -40,14 +40,19 @@ class TestModels(TestCase):
             major="thing",
             age="22",
         )
+
     def test_create_registration(self):
         Registration.objects.create(
-               customer = self.user1,
-    total = 19.5,
-    payment_status = "PENDING",
-
-    reference_number = "sw21903576",
+            customer=self.user1,
+            total=19.5,
+            payment_status="PENDING",
+            reference_number="sw21903576",
         )
 
-
-
+    def test_update_registration(self):
+        Registration.objects.update(
+            customer=self.user1,
+            total=49.5,
+            payment_status="PENDING",
+            reference_number="sw21903576",
+        )
